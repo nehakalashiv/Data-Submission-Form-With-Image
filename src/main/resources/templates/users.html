@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1>User List</h1>
+        <table class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Photo</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="user:${users}">
+              <td th:text="${user.name}"></td>
+              <td th:text="${user.phoneNumber}"></td>
+              <td scope="col">
+                <img
+                  th:src="*{'data:photo/png;base64,'+{user.photo}}"
+                  style="width: 100px; height: 100px"
+                />
+              </td>
+              <td th:text="${user.email}"></td>
+              <td>
+                <a
+                  th:href="@{/users/edit/{id} (id=${user.id})}"
+                  class="btn btn-primary"
+                  >Edit</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <a th:href="@{/users/new}" class="btn btn-primary btn-sm mb-3"
+          >Add User</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
